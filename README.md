@@ -54,3 +54,7 @@ Then configure and build G'MIC-Qt normally.
 The patch was tested on Apple Silicon macOS with XQuartz.
 
 With the patched G'MIC-Qt build, interactive G'MIC games and demos can use the X11 display backend successfully.
+
+## AI assistance
+
+AI assistance was used during the development and testing of this patch, including source-code analysis, troubleshooting, and verification of the build configuration.
