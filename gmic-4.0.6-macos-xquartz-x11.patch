@@ -1,0 +1,35 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -86,7 +86,7 @@
+ pkg_check_modules(CURL libcurl)
+ 
+ # X11 uniquement sur les systèmes non-Apple/non-Windows (miroir du Makefile)
+-if(NOT APPLE AND NOT WIN32)
++if(NOT WIN32)
+   pkg_check_modules(X11 x11)
+ endif()
+ 
+--- a/gmic-qt/CMakeLists.txt
++++ b/gmic-qt/CMakeLists.txt
+@@ -335,19 +335,18 @@
+     add_definitions(-D_IS_UNIX_)
+     if(ANDROID)
+         add_definitions(-Dcimg_display=0)
+-    elseif(NOT APPLE)
++    else()
+         add_definitions(-Dcimg_display=1)
+         add_definitions(-Dcimg_use_vt100)
+         find_package(X11)
+         set(gmic_qt_LIBRARIES
+             ${gmic_qt_LIBRARIES}
+-            ${X11_LIBRARIES} # XXX: Search for X11: Wayland is coming!
++            ${X11_LIBRARIES}
+         )
+     endif()
+ endif()
+ 
+ if (APPLE)
+-    add_definitions(-Dcimg_display=0)
+     add_definitions(-D_IS_MACOS_)
+     set(CMAKE_MACOSX_RPATH 1)
+     set(BUILD_WITH_INSTALL_RPATH 1)
