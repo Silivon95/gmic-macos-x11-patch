@@ -4,15 +4,15 @@ Patch for G'MIC 4.0.6 that enables the X11 display backend on macOS.
 
 ## Problem
 
-G'MIC interactive commands such as `x_2048` report:
+Interactive G'MIC games and demos from **Games & Demos** can report:
 
     Command 'x_2048': No display available.
 
-On macOS, the upstream G'MIC-Qt CMake configuration disables CImg display support:
+On macOS, the upstream G'MIC-Qt CMake configuration disables CImg display support with:
 
     -Dcimg_display=0
 
-This prevents interactive G'MIC demos from opening a window, even when XQuartz is installed and `$DISPLAY` is available.
+This prevents interactive G'MIC games and demos from opening their own windows, even when XQuartz is installed and `$DISPLAY` is available.
 
 ## Solution
 
@@ -22,6 +22,8 @@ This patch:
 - builds G'MIC-Qt with `cimg_display=1`;
 - links the X11 libraries;
 - keeps the existing Android and Windows display handling unchanged.
+
+This restores the X11 display backend required by interactive G'MIC games and demos on macOS, including `x_2048` and other similar commands.
 
 ## Requirements
 
@@ -51,4 +53,4 @@ Then configure and build G'MIC-Qt normally.
 
 The patch was tested on Apple Silicon macOS with XQuartz.
 
-With the patched G'MIC-Qt build, the G'MIC `2048` interactive demo launches successfully.
+With the patched G'MIC-Qt build, interactive G'MIC games and demos can use the X11 display backend successfully.
